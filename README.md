@@ -91,7 +91,7 @@ Example
     >>> Author.objects.filter(id=author.id).delete()
         
     # List of author objects will be soft-deleted
-    >> Author.objects.filter(id__in=[1,]).delete()
+    >>> Author.objects.filter(id__in=[1,]).delete()
     >>> Author.all_objects.all().values()
     <SoftDeleteQuerySet [{'id': 1, 'is_deleted': True, 'deleted_at': datetime.datetime(2020, 5, 20, 10, 51, 52, 50725, tzinfo=<UTC>), 'name': 'mohammad'}]>
     
@@ -112,7 +112,7 @@ Example
     >>> author = authors.first()
     >>> author
     <Author: Author object (1)>
-    >> autho.book_set.first()
+    >> author.book_set.first()
     <Book: Book object (1)>
     >> author.profile
     <Profile: Profile object (1)>   
