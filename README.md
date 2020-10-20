@@ -17,14 +17,13 @@ Using Django Easy Soft Delete package when model instances are soft deleted(defa
 If a model has a non-null is_deleted and deleted_at values, the model instance has been soft deleted
 
 
-This package gives Django model instances the ability to be soft-deleted(masked or hidden), as well it can make any model instance-related objects as soft deleted on model instance level if you have set the option _soft_delete_cascade = True
-Besides for that, it gives the ability to restore any soft-deleted object, and any model instance-related objects on the model instance level if you have set the option _restore_soft_deleted_related_objects = True
+This package gives Django model instances the ability to be soft-deleted(masked or hidden), and it gives the ability to restore any soft-deleted object,
 And obviously it gives the ability to be normally deleted (hard delete)
 
 You have to take into consideration the following:
-# If object hard deleted, that would delete all related objects.
-# You can't use it as is for many-to-many relation, obviously.
-# You could use soft-delete-cascade, restore and restore-related-objects correctly using model instance.
+- When the object hard deleted, that would delete all related objects.
+- You can't use it as is for many-to-many relation, obviously.
+- You could use soft-delete-cascade, restore and restore-related-objects correctly using model instance.
 
 
 Example
@@ -36,8 +35,8 @@ Example
     from django_softdelete.models import SoftDeleteModel
     from django.utils import timezone
 
-   # models
-   class Author(SoftDeleteModel):
+    # models
+    class Author(SoftDeleteModel):
         _soft_delete_cascade = True
         _restore_soft_deleted_related_objects = True
 
@@ -89,17 +88,13 @@ Example
     # List of author objects will be soft-deleted
     >> Author = objects.filter(id__in=[id's]).delete()
     
-    # If you would single-level soft deleted objects restoring you could inherit SoftDeleteModel without override _restore_soft_deleted_related_objects.
-     # as we set _restore_soft_deleted_related_objects=True then any objects related to author beside the author object will be restored.
+     # as we set _restore_soft_deleted_related_objects=True then any objects related 
+     to author beside the author object will be restored.
      >>> author = Author.all_objects.get(id=1)
      >>> author.restore()
     
     # once you have run restore() method is_deleted flag will set False and deleted_at will set null
-    
-    # After restorting
-     >>> Author.objects.count() //1
-     >>> Profile.objects.count() //1
-     >>> Book.objects.count() //1
+   
 
     # This will be hard deleted from the database.
     >>> author.hard_delete()
