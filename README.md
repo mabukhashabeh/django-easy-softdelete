@@ -2,7 +2,8 @@ Django Easy Soft Delete
 =======================
 
 
-Goals
+
+Goal
 ------------
 
 The Default behavior for Django model instances delete action is
