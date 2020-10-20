@@ -8,6 +8,7 @@
 mm.pyc
 build
 dist
+django_easy_softdelete.egg-info
 
 # pycharm project files
 .idea
